@@ -11,39 +11,37 @@
     <meta name="keywords" content="" />
     <!-- 商品详情 -->
     <!-- Custom Theme files -->
-    <link href="${pageContext.servletContext.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${pageContext.servletContext.contextPath}/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${pageContext.servletContext.contextPath}/css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- //Custom Theme files -->
-    <!-- font-awesome icons -->
-    <link href="${pageContext.servletContext.contextPath}/css/font-awesome.css" rel="stylesheet">
-    <!-- //font-awesome icons -->
+    <link href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="${pageContext.servletContext.contextPath}/css/style.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/skins/color.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootsnav.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/overwrite.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style1.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/fonts/FontAwesome/font-awesome.css" rel="stylesheet">
     <!-- js -->
-    <script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-1.11.0.min.js"></script>
+    <script  src="${pageContext.servletContext.contextPath}/js/bootstrap-3.1.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootsnav.js"></script>
     <!-- //js -->
-    <!-- web fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-    <!-- //web fonts -->
     <!-- for bootstrap working -->
-    <script type="text/javascript" src="${pageContext.servletContext.contextPath}/js/bootstrap-3.1.1.min.js"></script>
     <!-- //for bootstrap working -->
 </head>
 <body>
 <!-- single -->
+<jsp:include page="navigation.jsp"/>
 <div class="single">
     <div class="container">
         <div class="col-md-4 single-left">
             <div class="flexslider">
                 <ul class="slides">
-                    <li data-thumb="${pageContext.servletContext.contextPath}/images/${light.image1}">
-                        <div class="thumb-image"> <img src="${pageContext.servletContext.contextPath}/images/${light.image1}" data-imagezoom="true" class="img-responsive" alt=""> </div>
+                    <li data-thumb="${pageContext.request.contextPath}/${light.image1}">
+                        <div class="thumb-image"> <img src="${pageContext.request.contextPath}/${light.image1}" data-imagezoom="true" class="img-responsive" alt=""> </div>
                     </li>
-                    <li data-thumb="${pageContext.servletContext.contextPath}/images/${light.image2}">
-                        <div class="thumb-image"> <img src="${pageContext.servletContext.contextPath}/images/${light.image2}" data-imagezoom="true" class="img-responsive" alt=""> </div>
+                    <li data-thumb="${pageContext.request.contextPath}/${light.image2}">
+                        <div class="thumb-image"> <img src="${pageContext.request.contextPath}/${light.image2}" data-imagezoom="true" class="img-responsive" alt=""> </div>
                     </li>
-                    <li data-thumb="${pageContext.servletContext.contextPath}/images/${light.image3}">
-                        <div class="thumb-image"> <img src="${pageContext.servletContext.contextPath}/images/${light.image3}" data-imagezoom="true" class="img-responsive" alt=""> </div>
+                    <li data-thumb="${pageContext.request.contextPath}/${light.image3}">
+                        <div class="thumb-image"> <img src="${pageContext.request.contextPath}/${light.image3}" data-imagezoom="true" class="img-responsive" alt=""> </div>
                     </li>
                 </ul>
             </div>
@@ -65,7 +63,7 @@
             <!-- //zooming-effect -->
         </div>
         <div class="col-md-8 single-right">
-            <h3>小仙女闪闪发亮灯饰</h3>
+            <h3>${light.name}</h3>
             <!--<span>${light.brandByBrandId.brandName}</span><span>${light.stryleByStyleId.styleName}</span><span>${light.catagoryByCatagoryId.catagoryName}</span> -->
             <div class="description">
                 <h5>材质：</h5>
@@ -86,13 +84,21 @@
                     <div class="quantity">
                         <div class="quantity-select">
                             <div class="entry value-minus1">&nbsp;</div>
-                            <input type="text" id="quantity" name="quantity" size=2 value=1 />
+                            <input type="text" id="quantity" name="quantity" size=2 value="1" />
                             <div class="entry value-plus1 active">&nbsp;</div>
                             <small style="color: #098dff;">(库存：${light.quantity})</small>
                         </div>
                     </div>
                     <!--quantity-->
                     <script>
+                        $('#quantity').keyup(function () {
+                            var quantity = $(this);
+                            var num = quantity.val();
+                            var val = parseInt(quantity.val());
+                            if (isNaN(num) || (val < 1)) { quantity.val("1"); }
+                            if (val > ${light.quantity}) { quantity.val(${light.quantity}); }
+                        });
+                        
                         $('.value-plus1').on('click', function(){
                             if(Number($('#quantity').val())<${light.quantity}) $('#quantity').val(Number($('#quantity').val())+1);
                         });
@@ -129,7 +135,7 @@
                     <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>买家评价</span></li>
                 </ul>
                 <div class="tab-1 resp-tab-content additional_info_grid" aria-labelledby="tab_item-0">
-                    <h3>小仙女闪闪发亮灯饰</h3>
+                    <h3>${light.name}</h3>
                     <p>${light.description}</p>
                 </div>
 
@@ -172,6 +178,46 @@
         </script>
     </div>
 </div>
-
+<div class="footer">
+    <div class="container">
+        <div class="footer-grids">
+            <div class="col-md-3 about-us">
+                <h3>About Us</h3>
+                <p>Maecenas nec auctor sem. Vivamus porttitor tincidunt elementum nisi a, euismod rhoncus urna. Curabitur scelerisque vulputate arcu eu pulvinar. Fusce vel neque diam</p>
+            </div>
+            <div class="col-md-3 ftr-grid">
+                <h3>Information</h3>
+                <ul class="nav-bottom">
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">New Products</a></li>
+                    <li><a href="#">Location</a></li>
+                    <li><a href="#">Our Stores</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 ftr-grid">
+                <h3>More Info</h3>
+                <ul class="nav-bottom">
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Membership</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 ftr-grid">
+                <h3>Categories</h3>
+                <ul class="nav-bottom">
+                    <li><a href="#">Car Lights</a></li>
+                    <li><a href="#">LED Lights</a></li>
+                    <li><a href="#">Decorates</a></li>
+                    <li><a href="#">Wall Lights</a></li>
+                    <li><a href="#">Protectors</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
