@@ -26,7 +26,7 @@ public class LightDAO {
     }
 
     //获取灯饰详情
-    public Light getLightById(int lightId){
+    public  Light getLightById(int lightId){
         return (Light) this.getSession().createQuery("from Light where lightId=?").setParameter(0, lightId).uniqueResult();
     }
 
