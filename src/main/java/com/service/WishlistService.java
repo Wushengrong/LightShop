@@ -14,10 +14,11 @@ import java.util.List;
 @Service
 @Transactional
 public class WishlistService {
-    @Autowired   WishlistDao wishlistDao;
+    @Autowired
+    WishlistDao wishlistDao;
     //获取所有收藏夹
-    public List<Wishlist> getWishlist() {
-        return null;
+    public List<Wishlist> getWishlist(int userId) {
+        return wishlistDao.getWishlist(userId);
     }
     //获取收藏夹信息
     public  Wishlist getWishlistById(int UserId){

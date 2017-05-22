@@ -20,8 +20,8 @@ public class WishlistDao {
     }
 
     //获取所有收藏夹
-    public List<Wishlist> getWishlist() {
-        return this.getSession().createQuery("from Wishlist").list();
+    public List<Wishlist> getWishlist(int userId) {
+        return this.getSession().createQuery("from Wishlist where userId=?").setParameter(0,userId).list();
     }
     //获取收藏夹信息
     public  Wishlist getWishlistById(int UserId){

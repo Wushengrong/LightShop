@@ -6,13 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import sun.misc.Contended;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-@RequestMapping("Wishlist")
+@RequestMapping("/Wishlist")
 public class WishlistController {
     @Autowired
     WishlistService wishlistService;
@@ -23,16 +21,15 @@ public class WishlistController {
     }
 
     //获取所有收藏夹
-    public List<Wishlist> getWishlist(){
-        return null;
+    public String getWishlist(){
+        return "wi";
     }
 
     //获取收藏夹信息
     @RequestMapping("/WishlistInfo")
     public String getWishlistById(Model model){
-        int UserId=1;
-        Wishlist wishlist=wishlistService.getWishlistById(UserId);
-        model.addAttribute("wishlist",wishlist);
+        int userId=1;
+        model.addAttribute("wishlist",wishlistService.getWishlist(userId));
         return "Wishlist";
     }
 
