@@ -1,5 +1,7 @@
 package com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -14,6 +16,7 @@ public class Style {
 
     @Id
     @Column(name = "StyleId", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getStyleId() {
         return styleId;
     }
@@ -53,6 +56,7 @@ public class Style {
     }
 
     @OneToMany(mappedBy = "styleByStyleId")
+    @JsonIgnore
     public Collection<Light> getLightsByStyleId() {
         return lightsByStyleId;
     }

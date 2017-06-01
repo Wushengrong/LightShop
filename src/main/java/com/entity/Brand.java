@@ -1,5 +1,7 @@
 package com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -10,10 +12,12 @@ import java.util.Collection;
 public class Brand {
     private Integer brandId;
     private String brandName;
+    @JsonIgnore
     private Collection<Light> lightsByBrandId;
 
     @Id
     @Column(name = "BrandId", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getBrandId() {
         return brandId;
     }

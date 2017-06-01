@@ -1,5 +1,7 @@
 package com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -10,10 +12,12 @@ import java.util.Collection;
 public class Orderstates {
     private Integer id;
     private String name;
+    @JsonIgnore
     private Collection<Orders> ordersById;
 
     @Id
     @Column(name = "Id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }
