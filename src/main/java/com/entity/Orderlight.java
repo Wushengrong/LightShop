@@ -1,5 +1,7 @@
 package com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -11,6 +13,7 @@ public class Orderlight {
     private String orderId;
     private Integer lightId;
     private Integer quantity;
+    @JsonIgnore
     private Orders ordersByOrderId;
     private Light lightByLightId;
 
@@ -79,7 +82,7 @@ public class Orderlight {
         return result;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "OrderId", referencedColumnName = "OrdersId", nullable = false,insertable = false,updatable = false)
     public Orders getOrdersByOrderId() {
         return ordersByOrderId;
@@ -89,7 +92,7 @@ public class Orderlight {
         this.ordersByOrderId = ordersByOrderId;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "LightId", referencedColumnName = "LightId", nullable = false,insertable = false,updatable = false)
     public Light getLightByLightId() {
         return lightByLightId;

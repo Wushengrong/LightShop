@@ -1,5 +1,7 @@
 package com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -10,10 +12,12 @@ import java.util.Collection;
 public class Catagory {
     private Integer catagoryId;
     private String catagoryName;
+    @JsonIgnore
     private Collection<Light> lightsByCatagoryId;
 
     @Id
     @Column(name = "CatagoryId", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getCatagoryId() {
         return catagoryId;
     }
