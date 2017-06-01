@@ -25,14 +25,15 @@ public class WishlistService {
         return wishlistDao.getWishlistById(UserId);
     }
 
-    public void addWishlist(Wishlist wishlist){
-
+    public void deleteWishlist(int wishlistId){
+        wishlistDao.deleteWishlist(wishlistDao.getWishlistById(wishlistId));
     }
 
+    public void addWishlist(int lightId){
+
+    }
     public void updateWishlist(int UserId){
 
     }
-    public void deleteWishlistById(int UserId){
 
-    }
 }

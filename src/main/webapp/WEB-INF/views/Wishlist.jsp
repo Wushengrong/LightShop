@@ -13,6 +13,13 @@
     <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
     <!-- 导航-->
     <script src="${pageContext.request.contextPath}/js/bootsnav.js"></script>
+    <script>
+        function deleteWishlistById(wishlistId) {
+            if(confirm("确定删除此商品？")) {
+                window.location.href="${pageContext.servletContext.contextPath}/Wishlist/deleteWishlist?wishlistId="+wishlistId;
+            }
+        }
+    </script>
     <link href="${pageContext.request.contextPath}/skins/color.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/bootsnav.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/overwrite.css" rel="stylesheet">
@@ -24,26 +31,30 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <ol class="breadcrumb">
             <li><a href="${pageContext.servletContext.contextPath}/index">首页</a></li>
-            <li class="active">查看购物车</li>
+            <li class="active">查看收藏夹</li>
         </ol>
     </div>
 </div>
 <div class="cart-wrap">
     <table id="cartTable" class="cart table table-condensed">
         <thead>
-            <th class="t-goods text-center"><label>产品名称</label></th>
-            <th class="text-center">产品图片</th>
-            <th class="t-selling-price text-center"><label>销售单价</label></th>
-            <th class="t-action"><label>操作</label></th>
+            <th>产品名称</th>
+            <th>产品图片</th>
+            <th>收藏日期</th>
+            <th>操作</th>
         </thead>
         <tbody>
         <c:forEach var="wish" items="${wishlist}">
         <tr>
-            <td>${wish.lightByLightId.name}</td>
-            <a href="${wish.lightByLightId.}"
+        <!--点击商品名称跳转相应商品详情页-->
+            <td><a href="${pageContext.servletContext.contextPath}/light/lightInfo?lightId=${wish.lightId}">
+                    ${wish.lightByLightId.name}
+                </a>
+            </td>
             <td><img src="${pageContext.request.contextPath}/${wish.lightByLightId.image1}" width="100" height="100"/> </td>
-            <td>${wish.lightByLightId.price}</td>
-            <td class="action" style="padding-top: 1.1rem;"><span class="delete btn btn-xs btn-warning">删除</span></td>
+            <td>${wish.storeDate}</td>
+
+            <td><button onclick="deleteWishlistById(${wish.wishListId})">删除</button> </td>
         </tr>
         </c:forEach>
         </tbody>
